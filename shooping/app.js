@@ -19,8 +19,26 @@ const displayProduct = (product)=>{
     li.innerText = product;
     productContainer.appendChild(li)
 }
+// check localstorage either it has or nor
+const gerCurt=()=>{
+    let cart= localStorage.getItem('item');
+    let presentCart;
+    if(cart){
+        presentCart=JSON.parse(cart)
+    }else{
+        presentCart = {}
+    }
+    return presentCart;
+}
 const addToLocaStorage=(product)=>{
-   localStorage.setItem('item',product)
+    let cart = gerCurt();
+      if(cart[product]){
+        cart[product] = cart[product] + 1;
+      }else{
+        cart[product] = 1;
+      }
+    let setProduct = JSON.stringify(cart)
+   localStorage.setItem('item',setProduct)
 }
 
 
