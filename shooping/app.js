@@ -14,14 +14,15 @@ const addItem=()=>{
     productName.value = '';
 }
 const displayProduct = (product)=>{
-    
-    let li = document.createElement('li');
+     let li = document.createElement('li');
     li.innerText = product;
     productContainer.appendChild(li)
 }
 // check localstorage either it has or nor
 const gerCurt=()=>{
-    let cart= localStorage.getItem('item');
+    let cart= localStorage.getItem('item')
+    ;
+    // displayProduct(cart)
     let presentCart;
     if(cart){
         presentCart=JSON.parse(cart)
@@ -44,5 +45,13 @@ const addToLocaStorage=(product)=>{
 
 const placeOrder = ()=>{
    productContainer.textContent = '';
-
+   localStorage.removeItem('item')
 }
+
+const displayLocalStorageCart=()=>{
+    let cart = gerCurt();
+    for(let name in cart){
+        displayProduct(name)
+    }
+}
+displayLocalStorageCart()
